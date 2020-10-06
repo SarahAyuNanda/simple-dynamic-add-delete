@@ -8,6 +8,10 @@ function App() {
   const [inputNameList, setInputNameList] = useState([{ firstname: '', lastname: '' }])
   return (
     <div className="App">
+      <div className="Form">
+        <input type="text" placeholder="Firstname" class="form-control" />
+        <input type="text" placeholder="Lastname" class="form-control" />
+      </div>
     </div>
   );
 }
