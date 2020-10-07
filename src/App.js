@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 function App() {
-  // list contains state for firstname and lastname
-  const [inputNameList, setInputNameList] = useState([{ firstname: '', lastname: '' }])
+  // list contains state for firstname and age
+  const [inputInfoList, setInputInfoist] = useState([{ firstname: '', age: 0 }])
   return (
     <div className="App">
       <div className="Form">
