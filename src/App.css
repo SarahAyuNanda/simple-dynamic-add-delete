@@ -5,3 +5,13 @@
   padding: 20px;
   font-size: 16px;
 }
+
+.Form {
+  display: flex;
+  flex-direction: row;
+}
+
+.Form input {
+  width: 300px;
+  margin-right: 10px;
+}
