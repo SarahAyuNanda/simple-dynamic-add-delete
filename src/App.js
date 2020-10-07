@@ -1,103 +1,99 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css';
+import './App.css'
 
-function App() {
-  // list contains state for firstname and age
-  const [inputInfoList, setInputInfoList] = useState([{ firstname: '', age: "" }])
+class App extends Component {
+  state = [
+    {
+      firstname: 'Sarah',
+      age: '24'
+    }
+  ]
 
-  // handle change to input info
-  const handleInputChange = (event, index) => {
+  handleInputChange = (event, index) => {
     const { name, value } = event.target
-    const infoList = [...inputInfoList]
+    const infoList = [...this.state]
     infoList[index][name] = value
-    setInputInfoList(infoList)
+    this.setState({ ...infoList })
   }
 
-  // handle click for delete button
-  const handleDeleteClick = index => {
-    const infoList = [...inputInfoList]
+  handleAddClick = () => {
+    this.setState([...this.state, { firstname: '', age: '' }])
+  }
+
+  handleDeleteClick = index => {
+    const infoList = [...this.state]
     infoList.splice(index, 1)
-    setInputInfoList(infoList)
+    this.setState({ ...infoList })
   }
 
-  // handle click for add button
-  const handleAddClick = () => {
-    setInputInfoList([...inputInfoList, { firstname: "", age: "" }])
-  }
-
-  // handle change to count the average 
-  const ageAverage = () => {
-    const sum = inputInfoList.reduce((beforeSum, currentSum) => beforeSum = beforeSum + parseInt(currentSum.age), 0)
-    const length = inputInfoList.length
+  ageAverage = () => {
+    const sum = this.state.reduce((beforeSum, currentSum) => beforeSum = beforeSum + parseInt(currentSum.age), 0)
+    const length = this.state.length
     const average = sum / length
     return average
   }
 
-  return (
-    <div className="App">
-      {/* ADD BUTTON */}
-      <button type="button" class="btn btn-primary" onClick={handleAddClick}>Add</button>
-
-      {/* INPUT FORM */}
-      {inputInfoList.map((data, index) => {
-        return (
-          <div className="Form">
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="Firstname"
-              class="form-control"
-              name="firstname"
-              value={data.firstname}
-              onChange={e => handleInputChange(e, index)} />
-            <input
-              type="number"
-              placeholder="Age"
-              class="form-control"
-              name="age"
-              value={data.age}
-              onChange={e => handleInputChange(e, index)} />
-            <button type="button" class="btn btn-danger" onClick={() => handleDeleteClick(index)}>Delete</button>
-          </div>
-        )
-      })}
-
-      {/* SHOW AVERAGE OF AGE */}
-      <div className="Average">
-        Average of age : {inputInfoList.length === 0 ? 0 : ageAverage()}
+  addFormInput = () => {
+    return this.state.map((data, index) => (
+      <div className="Form">
+        <input
+          type="text"
+          autoComplete="off"
+          placeholder="Firstname"
+          class="form-control"
+          name="firstname"
+          value={data.firstname}
+          onChange={e => this.handleInputChange(e, index)} />
+        <input
+          type="number"
+          placeholder="Age"
+          class="form-control"
+          name="age"
+          value={data.age}
+          onChange={e => this.handleInputChange(e, index)} />
+        <button type="button" class="btn btn-danger" onClick={() => this.handleDeleteClick(index)}>Delete</button>
       </div>
+    ))
+  }
 
-      {/* TABLE */}
-      <div class="table-responsive-sm">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr align="center">
-              <th scope="col" style={{ width: "50px" }}>#</th>
-              <th scope="col">Firstname</th>
-              <th scope="col">Age</th>
-            </tr>
-          </thead>
-          <tbody>
-            {inputInfoList.length === 0 ?
+  render() {
+
+
+    return (
+      <div className="App">
+        <button type="button" class="btn btn-primary" onClick={this.handleAddClick}>Add</button>
+
+        {this.addFormInput()}
+
+        <div className="Average">
+          Average of age : {this.ageAverage()}
+        </div>
+
+        <div class="table-responsive-sm">
+          <table class="table table-bordered table-hover">
+            <thead>
               <tr align="center">
-                <th colSpan="3" >...No showed data...</th>
-              </tr> :
-              inputInfoList.map((data, index) => (
-                <tr key={index} align="center">
+                <th scope="col" style={{ width: "50px" }}>#</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Age</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.map((data, index) => (
+                <tr align="center">
                   <td>{index + 1}</td>
                   <td>{data.firstname}</td>
                   <td>{data.age}</td>
                 </tr>
-              ))
-            }
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
