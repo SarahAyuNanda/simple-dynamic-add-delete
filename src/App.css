@@ -6,6 +6,10 @@
   font-size: 16px;
 }
 
+.App button {
+  width: 100px;
+}
+
 .Form {
   display: flex;
   flex-direction: row;
