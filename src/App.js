@@ -41,7 +41,7 @@ function App() {
               value={data.firstname}
               onChange={e => handleInputChange(e, index)} />
             <input
-              type="number"
+              type="text"
               placeholder="Age"
               class="form-control"
               name="age"
@@ -51,6 +51,32 @@ function App() {
           </div>
         )
       })}
+      <div class="table-responsive-sm">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Firstname</th>
+              <th scope="col">Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            {inputInfoList.length === 0 ?
+              <tr align="center">
+                <th colSpan="3" >...No showed data...</th>
+              </tr> :
+              inputInfoList.map((data, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{data.firstname}</td>
+                  <td>{data.age}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
     </div>
   );
 }
