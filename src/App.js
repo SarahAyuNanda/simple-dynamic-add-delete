@@ -39,6 +39,11 @@ class App extends Component {
     return average
   }
 
+  // Function to count the total of age
+  ageTotal = () => {
+    return this.state.data.reduce((beforeSum, currentSum) => beforeSum = beforeSum + parseInt(currentSum.age), 0)
+  }
+
   // Function to change firstname to letter case whatever word format that input
   changeToLetterCase = (param) => {
     return param.charAt(0).toUpperCase() + param.slice(1)
@@ -73,7 +78,7 @@ class App extends Component {
               name="age"
               value={data.age}
               onChange={e => this.handleInputChange(e, index)} />
-              {/* Button to delete item by its index */}
+            {/* Button to delete item by its index */}
             <button type="button" class="btn btn-danger" onClick={() => this.handleDeleteClick(index)}>
               <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-person-x-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
@@ -85,6 +90,11 @@ class App extends Component {
         {/* Count average of all ages by the array */}
         <div className="Average">
           Average of age : {this.ageAverage()}
+        </div>
+
+        {/* Count total of age */}
+        <div className="Total">
+          Total of age : {this.ageTotal()}
         </div>
 
         {/* Show all the input in the table */}
