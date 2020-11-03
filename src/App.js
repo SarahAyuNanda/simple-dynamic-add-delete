@@ -4,10 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 class App extends Component {
+  // Create data as an array in state
   state = {
     data: []
   }
 
+  // Function to handle the change in the form
   handleInputChange = (event, index) => {
     const { name, value } = event.target
     const infoList = [...this.state.data]
@@ -15,18 +17,21 @@ class App extends Component {
     this.setState({ infoList })
   }
 
+  // Function to add form as an item of array
   handleAddClick = () => {
     const allData = this.state.data
     const addData = allData.push({ firstname: '', age: '' })
     this.setState([...this.state.data, addData])
   }
 
+  // Function to delete form by its index
   handleDeleteClick = index => {
     const allData = this.state.data
     const deleteData = allData.splice(index, 1)
     this.setState([...this.state.data, deleteData])
   }
 
+  // Function to count the average
   ageAverage = () => {
     const sum = this.state.data.reduce((beforeSum, currentSum) => beforeSum = beforeSum + parseInt(currentSum.age), 0)
     const length = this.state.data.length
@@ -34,6 +39,7 @@ class App extends Component {
     return average
   }
 
+  // Function to change firstname to letter case whatever word format that input
   changeToLetterCase = (param) => {
     return param.charAt(0).toUpperCase() + param.slice(1)
   }
